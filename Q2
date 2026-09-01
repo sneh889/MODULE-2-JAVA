@@ -1,0 +1,85 @@
+import java.util.*;
+
+abstract class Flight {
+    private String flightNumber;
+    private String airline;
+    private double fare;
+
+    Flight(String flightNumber, String airline, double fare) {
+        this.flightNumber = flightNumber;
+        this.airline = airline;
+        this.fare = fare;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    abstract double calculateFare();
+
+    public String toString() {
+        return "Flight No: " + flightNumber +
+               " Airline: " + airline +
+               " Fare: " + calculateFare();
+    }
+}
+
+class DomesticFlight extends Flight {
+
+    DomesticFlight(String flightNumber, String airline, double fare) {
+        super(flightNumber, airline, fare);
+    }
+
+    double calculateFare() {
+        return getFare() + (getFare() * 0.10);
+    }
+}
+
+class InternationalFlight extends Flight {
+
+    InternationalFlight(String flightNumber, String airline, double fare) {
+        super(flightNumber, airline, fare);
+    }
+
+    double calculateFare() {
+        return getFare() + (getFare() * 0.25);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+
+            if (line.trim().isEmpty())
+                continue;
+
+            String[] data = line.split(",");
+
+            String type = data[0];
+            String number = data[1];
+            String airline = data[2];
+            double fare = Double.parseDouble(data[3]);
+
+            Flight flight;
+
+            if (type.equalsIgnoreCase("Domestic")) {
+                flight = new DomesticFlight(number, airline, fare);
+            } else {
+                flight = new InternationalFlight(number, airline, fare);
+            }
+
+            System.out.println(flight);
+        }
+    }
+}
