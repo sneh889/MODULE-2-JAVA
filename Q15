@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Passport {
+    private String passportNo;
+    private String issueDate;
+    private String expiryDate;
+
+    Passport(String passportNo, String issueDate, String expiryDate) {
+        this.passportNo = passportNo;
+        this.issueDate = issueDate;
+        this.expiryDate = expiryDate;
+    }
+
+    public String toString() {
+        return "Passport: " + passportNo +
+               " Issue: " + issueDate +
+               " Expiry: " + expiryDate;
+    }
+}
+
+class Citizen {
+    private String name;
+    private String dob;
+    private String address;
+    private Passport passport;
+
+    Citizen(String name, String dob, String address) {
+        this.name = name;
+        this.dob = dob;
+        this.address = address;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
+    }
+
+    public String toString() {
+        return "Citizen: " + name +
+               " DOB: " + dob +
+               " Address: " + address +
+               "\n" + passport;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] citizenData = sc.nextLine().split(",");
+
+        Citizen citizen = new Citizen(
+            citizenData[0],
+            citizenData[1],
+            citizenData[2]
+        );
+
+        String[] passportData = sc.nextLine().split(",");
+
+        Passport passport = new Passport(
+            passportData[0],
+            passportData[1],
+            passportData[2]
+        );
+
+        citizen.setPassport(passport);
+
+        System.out.println(citizen);
+    }
+}
