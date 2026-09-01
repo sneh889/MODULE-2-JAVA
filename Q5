@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Person {
+    protected String name;
+    protected int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Doctor extends Person {
+    protected String specialization;
+
+    Doctor(String name, int age, String specialization) {
+        super(name, age);
+        this.specialization = specialization;
+    }
+}
+
+class Surgeon extends Doctor {
+    private String surgeryType;
+
+    Surgeon(String name, int age, String specialization, String surgeryType) {
+        super(name, age, specialization);
+        this.surgeryType = surgeryType;
+    }
+
+    public String toString() {
+        return "Name: " + name + "\n" +
+               "Age: " + age + "\n" +
+               "Specialization: " + specialization + "\n" +
+               "Surgery Type: " + surgeryType;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] data = sc.nextLine().split(",");
+
+        Surgeon s = new Surgeon(
+            data[0],
+            Integer.parseInt(data[1]),
+            data[2],
+            data[3]
+        );
+
+        System.out.println(s);
+    }
+}
