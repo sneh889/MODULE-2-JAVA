@@ -1,0 +1,57 @@
+import java.util.*;
+
+class Author {
+    private String name;
+    private String email;
+    private String gender;
+
+    Author(String name, String email, String gender) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+    }
+
+    public String toString() {
+        return name + " (" + gender + "), Email: " + email;
+    }
+}
+
+class Book {
+    private String title;
+    private double price;
+    private Author author;
+
+    Book(String title, double price, Author author) {
+        this.title = title;
+        this.price = price;
+        this.author = author;
+    }
+
+    public String toString() {
+        return "Book: " + title + "\n" +
+               "Price: " + (int)price + "\n" +
+               "Author: " + author;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] data = sc.nextLine().split(",");
+
+        Author author = new Author(
+            data[2],
+            data[3],
+            data[4]
+        );
+
+        Book book = new Book(
+            data[0],
+            Double.parseDouble(data[1]),
+            author
+        );
+
+        System.out.println(book);
+    }
+}
