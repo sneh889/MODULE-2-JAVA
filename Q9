@@ -1,0 +1,74 @@
+import java.util.*;
+
+class Course {
+    private String courseName;
+    private String duration;
+
+    Course(String courseName, String duration) {
+        this.courseName = courseName;
+        this.duration = duration;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+}
+
+class Student {
+    protected String name;
+    protected Course enrolledCourse;
+
+    Student(String name, Course enrolledCourse) {
+        this.name = name;
+        this.enrolledCourse = enrolledCourse;
+    }
+
+    public String toString() {
+        return "Student: " + name +
+               " Course: " + enrolledCourse.getCourseName() +
+               " (" + enrolledCourse.getDuration() + ")";
+    }
+}
+
+class PremiumStudent extends Student {
+    private double discount;
+
+    PremiumStudent(String name, Course enrolledCourse, double discount) {
+        super(name, enrolledCourse);
+        this.discount = discount;
+    }
+
+    public String toString() {
+        return "Premium Student: " + name +
+               " Course: " + enrolledCourse.getCourseName() +
+               " (" + enrolledCourse.getDuration() + ")" +
+               " Discount: " + (int)discount + "%";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] courseData = sc.nextLine().split(",");
+
+        Course course = new Course(courseData[0], courseData[1]);
+
+        String[] studentData = sc.nextLine().split(",");
+        Student student = new Student(studentData[0], course);
+
+        String[] premiumData = sc.nextLine().split(",");
+        PremiumStudent premium = new PremiumStudent(
+            premiumData[0],
+            course,
+            Double.parseDouble(premiumData[2])
+        );
+
+        System.out.println(student);
+        System.out.println(premium);
+    }
+}
