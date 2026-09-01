@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Room {
+    private String roomNumber;
+    private String block;
+    private String type;
+
+    Room(String roomNumber, String block, String type) {
+        this.roomNumber = roomNumber;
+        this.block = block;
+        this.type = type;
+    }
+
+    public String toString() {
+        return "Room: " + roomNumber + " " + block + " " + type;
+    }
+}
+
+class Student {
+    private String name;
+    private String roll;
+    private String course;
+    private Room room;
+
+    Student(String name, String roll, String course) {
+        this.name = name;
+        this.roll = roll;
+        this.course = course;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String toString() {
+        return "Student: " + name + " (" + roll + ") " + course +
+               "\n" + room;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] studentData = sc.nextLine().split(",");
+
+        Student student = new Student(
+            studentData[0],
+            studentData[1],
+            studentData[2]
+        );
+
+        String[] roomData = sc.nextLine().split(",");
+
+        Room room = new Room(
+            roomData[0],
+            roomData[1],
+            roomData[2]
+        );
+
+        student.setRoom(room);
+
+        System.out.println(student);
+    }
+}
